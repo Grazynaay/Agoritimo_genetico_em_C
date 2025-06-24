@@ -14,5 +14,6 @@ TNo* individuoAleatorio(Populacao* populacao);
 void pais(Populacao* nova, Populacao* original, Config* config, Labirinto* lab);
 Individuo* crossover(Individuo* pai, Individuo* mae, Config* config);
 TNo* melhorIndividuo(Populacao* populacao);
+void salvarEvolucao(int geracao, TNo* melhorIndividuo, const char* nomeArquivo); 
 
 #endif
