@@ -149,3 +149,14 @@ TNo* melhorIndividuo(Populacao* populacao) {
 
     return melhor_individuo; 
 } 
+
+void salvarEvolucao(int geracao, TNo* melhorIndividuo, const char* nomeArquivo) {
+    FILE* arquivo = fopen(nomeArquivo, "a");  
+    if (!arquivo) {
+        printf("Erro ao abrir arquivo '%s' para escrita.\n", nomeArquivo);
+        return;
+    }
+
+    fprintf(arquivo, "%d,%.2f,%s\n", geracao, melhorIndividuo->individuo.fitness, melhorIndividuo->individuo.genoma);
+    fclose(arquivo);
+}
