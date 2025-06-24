@@ -30,15 +30,26 @@ int main() {
     Populacao* nova = criarPopulacao();
     pais(nova, pop, &confi, &labi);
 
+  
+
+    FILE* f = fopen("evolucao.csv", "w");
+        if (f) {
+        fprintf(f, "geracao,fitness,movimentos\n");
+        fclose(f);
+    }
+
     for (int ger = 0; ger < confi.max_geracoes; ger++) {
-    Populacao* nova = criarPopulacao();
-    pais(nova, pop, &confi, &labi);
+        Populacao* nova = criarPopulacao();
+        pais(nova, pop, &confi, &labi);
 
-    liberarPopulacao(pop);
-    pop = nova;
-    TNo* melhor = melhorIndividuo(pop);
+        liberarPopulacao(pop);
+        pop = nova;
 
-    printf("Geracao %d: melhor fitness = %d\n", ger, melhor->individuo.fitness);
+        TNo* melhor = melhorIndividuo(pop);
+
+        salvarEvolucao(ger, melhor, "evolucao.csv");
+
+        printf("Geracao %d: melhor fitness = %d\n", ger, melhor->individuo.fitness);
     }
     
     free(ind->genoma);
